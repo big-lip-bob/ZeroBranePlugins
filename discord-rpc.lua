@@ -1,3 +1,14 @@
+--[[
+
+This Plugin requires Discord-RPC
+https://github.com/discordapp/discord-rpc /releases (i used v3.4.0-win32)
+To place in ZeroBrane's root folder
+
+FFI Discord-RPC bindings credit goes to
+https://github.com/pfirsich/lua-discordRPC
+
+--]]
+
 local id = ID("discord-rpc")
 local ide = ide
 
@@ -280,15 +291,12 @@ function plugin:onIdle(event)
 end
 
 function plugin:onProjectLoad(path)
- -- ide:Print(path) 
- -- if type(path) ~= "string" then return end
  presence.details = "Working on : " .. path:match("([^\\/]+)[\\/]$")
 end
 
 local oldname
 function plugin:onEditorFocusSet(editor)
  local name = ide:GetDocument(editor).fileName
- --ide:Print(("%s | %s > %s"):format(name,oldname,tostring(name == oldname)))
  if name ~= oldname then
   presence.state = "Editing : " .. name
   presence.startTimestamp = time()
