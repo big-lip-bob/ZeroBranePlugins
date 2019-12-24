@@ -277,7 +277,7 @@ end
 local presence = {partySize = 1,largeImageKey = "zerobrane",largeImageText = "ZeroBrane"}
 
 function plugin:onRegister()
- rpc.initialize("658741329093853184", true)
+ rpc.initialize("658741329093853184", true) -- My discord app ID so you can have icons and the status
 end
 
 local oldtime = time()
@@ -291,8 +291,6 @@ function plugin:onIdle(event)
 end
 
 function plugin:onProjectLoad(path)
- -- ide:Print(path) 
- -- if type(path) ~= "string" then return end
  presence.details = "Working on : " .. path:match("([^\\/]+)[\\/]$")
 end
 
@@ -300,7 +298,6 @@ local upper = string.upper
 local oldname
 function plugin:onEditorFocusSet(editor)
  local name = ide:GetDocument(editor).fileName
- --ide:Print(("%s | %s > %s"):format(name,oldname,tostring(name == oldname)))
  if name ~= oldname then
   presence.state = "Editing : " .. name
   presence.startTimestamp = time()
