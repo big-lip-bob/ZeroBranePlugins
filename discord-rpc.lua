@@ -1,7 +1,7 @@
 --[[
 
 This Plugin requires Discord-RPC
-https://github.com/discordapp/discord-rpc /releases (i used v3.4.0-win32)
+https://github.com/discordapp/discord-rpc/releases (i used v3.4.0-win32)
 To place in ZeroBrane's root folder
 
 FFI Discord-RPC bindings credit goes to
