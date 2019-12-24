@@ -22,7 +22,7 @@ local time = os.time
 local rpc
 do
  local ffi = require "ffi"
- local discordRPClib = ffi.load("discord-rpc-32")
+ local discordRPClib = ffi.load("discord-rpc")
  
  ffi.cdef([[
  typedef struct DiscordRichPresence {
