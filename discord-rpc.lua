@@ -275,19 +275,32 @@ do
 end
 
 local presence = {partySize = 1,largeImageKey = "zerobrane",largeImageText = "ZeroBrane"}
+local idle = 0
 
 function plugin:onRegister()
- rpc.initialize("658741329093853184", true) -- My discord app ID so you can have icons and the status
+ rpc.initialize("658741329093853184", true)
 end
 
+local oldname
 local oldtime = time()
 function plugin:onIdle(event)
  rpc.runCallbacks()
  local newtime = time()
  if newtime > oldtime then
-  rpc.updatePresence(presence)
+  if idle >= 60 then
+   presence.state = "Procrastinating"
+   presence.smallImageKey = "sleeping"
+   presence.smallImageText = "Sleeping"
+   oldname = false
+  end
+  idle = idle + 1
   oldtime = newtime
+  rpc.updatePresence(presence)
  end
+end
+
+function plugin:onEditorCharAdded(code)
+ idle = 0
 end
 
 function plugin:onProjectLoad(path)
@@ -295,7 +308,6 @@ function plugin:onProjectLoad(path)
 end
 
 local upper = string.upper
-local oldname
 function plugin:onEditorFocusSet(editor)
  local name = ide:GetDocument(editor).fileName
  if name ~= oldname then
@@ -306,6 +318,7 @@ function plugin:onEditorFocusSet(editor)
   presence.smallImageText = extention:gsub("^%l", upper)
   oldname = name
  end
+ idle = 0
 end
 
 function plugin:onUnRegister()
