@@ -284,7 +284,7 @@ end
 local oldname
 local oldtime = time()
 function plugin:onIdle(event)
- rpc.runCallbacks()
+ --rpc.runCallbacks()
  local newtime = time()
  if newtime > oldtime then
   if idle >= 60 then
